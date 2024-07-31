@@ -15,13 +15,14 @@ namespace usingLinq.Context
         }
 
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Apply global query filter to exclude soft-deleted entities
-            modelBuilder.Entity<Hotel>().HasQueryFilter(p => !p.IsDeleted);
+            modelBuilder.Entity<Hotel>().HasQueryFilter(hotel => !hotel.IsDeleted);
         }
     }
 }

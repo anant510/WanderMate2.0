@@ -135,3 +135,5 @@ C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\refint\usingLinq.dll
 C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\usingLinq.pdb
 C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\usingLinq.genruntimeconfig.cache
 C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\ref\usingLinq.dll
+C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\usingLinq.sourcelink.json
+C:\Users\Dell\Desktop\EC\usingLinq\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
