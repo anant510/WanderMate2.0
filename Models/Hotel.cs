@@ -19,5 +19,8 @@ namespace usingLinq.Models
         public string ImageUrl { get; set; } = string.Empty;
 
          public bool IsDeleted { get; set; } = false; // Soft delete flag
+
+         // Navigation property: A hotel can have many reviews
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
