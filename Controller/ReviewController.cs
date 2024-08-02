@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using usingLinq.Context;
+using usingLinq.Dtos;
 using usingLinq.Models;
 
 namespace usingLinq.Controller
@@ -28,11 +29,22 @@ namespace usingLinq.Controller
 
         [HttpPost]
 
-        public IActionResult Create([FromBody] Review review)
+        public async Task<ActionResult<IEnumerable<Review>>> Create([FromBody] ReviewDto reviewDto)
         {
-            _context.Reviews.Add(review);
-            _context.SaveChanges();
+           try{
+                var review = new Review{
+
+                Rating = reviewDto.Rating,
+                ReviewText = reviewDto.ReviewText,
+                HotelId = reviewDto.HotelId
+            };
+
+            await _context.Reviews.AddAsync(review);
+            await _context.SaveChangesAsync();
             return Ok("Created sucessfully");
+           }catch{
+            return BadRequest();
+           }
         }
 
         [HttpDelete]

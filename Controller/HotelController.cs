@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using usingLinq.Context;
+using usingLinq.Dtos;
 using usingLinq.Models;
 
 namespace usingLinq.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class HotelController : ControllerBase
+    public class HotelController : ControllerBase  
     {
         private readonly ApplicationDbContext _context;
 
@@ -20,23 +22,33 @@ namespace usingLinq.Controller
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<IEnumerable<Hotel>>> Get()
         {
-            var hotel = _context.Hotels.ToList();
+            var hotel = await _context.Hotels.ToListAsync();
             return Ok(hotel);
         }
-
+  
         [HttpPost]
 
-        public IActionResult Create([FromBody]Hotel hotel)
+        public async Task<ActionResult<IEnumerable<Hotel>>> Create([FromBody] HotelDto hotelDto)
         {
+          try{
             // Ensure IsDeleted is false
-            hotel.IsDeleted = false;
+            hotelDto.IsDeleted = false;
 
-            _context.Hotels.Add(hotel);
-            _context.SaveChanges();
+            var hotel = new Hotel{
+                Name = hotelDto.Name,
+                Description = hotelDto.Description,
+                ImageUrl = hotelDto.ImageUrl,
+            };
+
+           await _context.Hotels.AddAsync(hotel);
+           await _context.SaveChangesAsync();
                return CreatedAtAction(nameof(GetById), new { id = hotel.Id }, hotel);
             // return Ok("Created Successfully");
+          }catch{
+            return BadRequest();
+          }
         }
 
         [HttpGet("{id}")]
@@ -53,9 +65,11 @@ namespace usingLinq.Controller
 
         [HttpPut("{id}")]
 
-        public IActionResult Update(int id , Hotel updateHotel)
+        public async Task<ActionResult<IEnumerable<Hotel>>> Update(int id , Hotel updateHotel)
         {
-            var findHotel = _context.Hotels.Find(id);
+            try{
+                
+            var findHotel = await _context.Hotels.FindAsync(id);
 
             if(findHotel == null)
             {
@@ -65,9 +79,13 @@ namespace usingLinq.Controller
             findHotel.Name = updateHotel.Name;
             findHotel.Description = updateHotel.Description;
             findHotel.ImageUrl = updateHotel.ImageUrl;
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
 
             return Ok("Updated Sucessfully");
+            
+            }catch{
+                return BadRequest();
+            }
         }
 
         [HttpDelete("{id}")]
