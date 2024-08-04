@@ -16,9 +16,11 @@ namespace usingLinq.Models
         public string ReviewText { get; set; } = String.Empty; 
 
         // Foreign key to Hotel
+          // Navigation property: A review belongs to one hotel
         public int? HotelId { get; set; }
-
-        // Navigation property: A review belongs to one hotel
         public Hotel? Hotel { get; set; }
+        public int? UserId { get; set; }
+        public User? User { get; set; }
+
     }
 }

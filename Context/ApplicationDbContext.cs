@@ -23,12 +23,24 @@ namespace usingLinq.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Review>()
+            .HasOne(r => r.User)
+            .WithMany(u => u.Reviews)
+            .HasForeignKey(r => r.UserId);
+
+
+            modelBuilder.Entity<Review>()
+            .HasOne(r => r.Hotel)
+            .WithMany(h => h.Reviews)
+            .HasForeignKey(r => r.HotelId);
+
+
         // Configure the one-to-many relationship
-        modelBuilder.Entity<Hotel>()
-            .HasMany(h => h.Reviews)
-            .WithOne(r => r.Hotel)
-            .HasForeignKey(r => r.HotelId)
-            .OnDelete(DeleteBehavior.Cascade); // Optional: Configure cascade delete
+        // modelBuilder.Entity<Hotel>()
+        //     .HasMany(h => h.Reviews)
+        //     .WithOne(r => r.Hotel)
+        //     .HasForeignKey(r => r.HotelId)
+        //     .OnDelete(DeleteBehavior.Cascade); // Optional: Configure cascade delete
 
         // Apply global query filter to exclude soft-deleted entities
         modelBuilder.Entity<Hotel>().HasQueryFilter(h => !h.IsDeleted);

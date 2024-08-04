@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using usingLinq.Context;
+using usingLinq.Dtos;
 using usingLinq.Models;
 using usingLinq.Service;
 
@@ -20,7 +21,7 @@ namespace usingLinq.Controller
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginModel model)
+        public IActionResult Login([FromBody] LoginDto model)
         {
             var user = _context.Users.SingleOrDefault(u => u.Username == model.Username && u.Password == model.Password);
 

@@ -7,7 +7,7 @@ namespace usingLinq.Dtos
 {
     public class ReviewDto
     {
-         public int? Rating { get; set; } 
+        public int? Rating { get; set; } 
 
         public string? ReviewText { get; set; } 
 
