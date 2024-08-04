@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using usingLinq.Context;
 using usingLinq.Dtos;
 using usingLinq.Models;
@@ -20,11 +21,36 @@ namespace usingLinq.Controller
             _context = context;
         }
 
-        [HttpGet]
-
-        public IActionResult Get()
+         [HttpGet]  
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
         {
-            return Ok(_context.Reviews.ToList());
+            return await _context.Reviews
+                                 .Include(r => r.Hotel)
+                                 .Include(r => r.User)
+                                 .ToListAsync();
+        }
+
+        //   [HttpGet]  
+        // public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        // {
+        //     return await _context.Reviews
+        //                          .ToListAsync();
+        // }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Review>> GetReview(int id)
+        {
+            var review = await _context.Reviews
+                                       .Include(r => r.Hotel)
+                                       .Include(r => r.User)
+                                       .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            return review;
         }
 
         [HttpPost]
@@ -36,7 +62,8 @@ namespace usingLinq.Controller
 
                 Rating = reviewDto.Rating,
                 ReviewText = reviewDto.ReviewText,
-                HotelId = reviewDto.HotelId
+                HotelId = reviewDto.HotelId,
+                UserId = reviewDto.UserId
             };
 
             await _context.Reviews.AddAsync(review);
@@ -47,21 +74,53 @@ namespace usingLinq.Controller
            }
         }
 
-        [HttpDelete]
-
-        public IActionResult Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReview(int id)
         {
-            var review = _context.Reviews.Find(id);
-
+            var review = await _context.Reviews.FindAsync(id);
             if (review == null)
             {
                 return NotFound();
             }
 
             _context.Reviews.Remove(review);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            return Ok("Deleted Sucessfully");
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutReview(int id, Review review)
+        {
+            if (id != review.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(review).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ReviewExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool ReviewExists(int id)
+        {
+            return _context.Reviews.Any(e => e.Id == id);
         }
     }
 }

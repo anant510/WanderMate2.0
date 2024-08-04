@@ -22,5 +22,7 @@ namespace usingLinq.Models
 
          // Navigation property: A hotel can have many reviews
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
     }
 }

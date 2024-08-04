@@ -11,6 +11,9 @@ namespace usingLinq.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
+
 
     }
 }

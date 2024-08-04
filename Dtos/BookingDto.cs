@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace usingLinq.Dtos
 {
-    public class ReviewDto
+    public class BookingDto
     {
-        public int? Rating { get; set; } 
+         public int? BookingId { get; set; }
+    
+        public DateTime? BookingDate { get; set; }
 
-        public string? ReviewText { get; set; } 
+        public int? UserId { get; set; }
 
         public int? HotelId { get; set; }
-
-         public int? UserId { get; set; }
     }
 }

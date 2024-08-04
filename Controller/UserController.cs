@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using usingLinq.Context;
+using usingLinq.Dtos;
 using usingLinq.Models;
 
 namespace usingLinq.Controller
@@ -26,8 +27,7 @@ namespace usingLinq.Controller
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] User model
-            )
+        public IActionResult Create([FromBody] UserDto model)
         {
             var user = new User
             {
