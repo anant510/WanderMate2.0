@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using usingLinq.Context;
@@ -20,13 +21,26 @@ namespace usingLinq.Controller
         {
             _context = context;
         }
-
+        // [Authorize(Roles ="Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> Get()
         {
-            var hotel = await _context.Hotels.ToListAsync();
-            return Ok(hotel);
+             var hotels = await _context.Hotels.ToListAsync();
+             var hotelDTO = hotels.Select( hotel => new HotelDto {
+
+                Name = hotel.Name,
+                Price=hotel.Price,
+                Description=hotel.Description,
+                ImageUrl =hotel.ImageUrl,
+                FreeCancellation =hotel.FreeCancellation,
+                ReserveNow = hotel.ReserveNow,
+                
+            }).ToList();
+
+            return Ok(hotelDTO);
         }
+
+
   
         [HttpPost]
 
@@ -40,6 +54,10 @@ namespace usingLinq.Controller
                 Name = hotelDto.Name,
                 Description = hotelDto.Description,
                 ImageUrl = hotelDto.ImageUrl,
+                Price = hotelDto.Price,
+                FreeCancellation = hotelDto.FreeCancellation,
+                ReserveNow = hotelDto.ReserveNow,
+
             };
 
            await _context.Hotels.AddAsync(hotel);
@@ -64,29 +82,49 @@ namespace usingLinq.Controller
         }
 
         [HttpPut("{id}")]
-
-        public async Task<ActionResult<IEnumerable<Hotel>>> Update(int id , Hotel updateHotel)
+        public async Task<ActionResult> Update(int id, [FromBody] HotelDto hotelDto)
         {
-            try{
-                
+            if (hotelDto == null)
+            {
+                return BadRequest("Hotel data is null");
+            }
+
+            // if (id != hotelDto.Id)
+            // {
+            //     return BadRequest("ID mismatch");
+            // }
+
+            // Find the existing hotel entity by id
             var findHotel = await _context.Hotels.FindAsync(id);
 
-            if(findHotel == null)
+            if (findHotel == null)
             {
-                return NotFound();
+                return NotFound("Hotel not found");
             }
 
-            findHotel.Name = updateHotel.Name;
-            findHotel.Description = updateHotel.Description;
-            findHotel.ImageUrl = updateHotel.ImageUrl;
-           await _context.SaveChangesAsync();
+            // Update the hotel entity with values from the DTO
+            findHotel.Name = hotelDto.Name;
+            findHotel.Description = hotelDto.Description;
+            findHotel.ImageUrl = hotelDto.ImageUrl;
+            findHotel.Price = hotelDto.Price; // Use existing price if not provided
+            findHotel.FreeCancellation = hotelDto.FreeCancellation;
+            findHotel.ReserveNow = hotelDto.ReserveNow;
+            findHotel.IsDeleted = hotelDto.IsDeleted;
 
-            return Ok("Updated Sucessfully");
-            
-            }catch{
-                return BadRequest();
+            _context.Entry(findHotel).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok("Updated Successfully");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
             }
         }
+
 
         [HttpDelete("{id}")]
 

@@ -16,7 +16,13 @@ namespace usingLinq.Models
 
         public string Description { get; set; }  = string.Empty;
 
-        public string ImageUrl { get; set; } = string.Empty;
+        public List<string> ImageUrl { get; set; } = new List<string>();
+
+        public int? Price {get; set;}
+
+        public bool FreeCancellation {get; set;}= false;
+
+        public bool ReserveNow {get; set;} = false;
 
          public bool IsDeleted { get; set; } = false; // Soft delete flag
 

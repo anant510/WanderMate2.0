@@ -28,26 +28,30 @@ namespace usingLinq.Context
              modelBuilder.Entity<Booking>()
             .HasOne(b => b.User)
             .WithMany(u => u.Bookings)
-            .HasForeignKey(b => b.UserId);
+            .HasForeignKey(b => b.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Booking>()
             .HasOne(b => b.Hotel)
             .WithMany(h => h.Bookings)
-            .HasForeignKey(b => b.HotelId);
+            .HasForeignKey(b => b.HotelId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Review>()
             .HasOne(r => r.User)
             .WithMany(u => u.Reviews)
-            .HasForeignKey(r => r.UserId);
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<Review>()
             .HasOne(r => r.Hotel)
             .WithMany(h => h.Reviews)
-            .HasForeignKey(r => r.HotelId);
+            .HasForeignKey(r => r.HotelId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             
-
+    
         // Configure the one-to-many relationship
         // modelBuilder.Entity<Hotel>()
         //     .HasMany(h => h.Reviews)

@@ -12,8 +12,8 @@ using usingLinq.Context;
 namespace usingLinq.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240804144131_bookingfirst")]
-    partial class bookingfirst
+    [Migration("20240806080550_second")]
+    partial class second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,19 +27,19 @@ namespace usingLinq.Migrations
 
             modelBuilder.Entity("usingLinq.Models.Booking", b =>
                 {
-                    b.Property<int>("BookingId")
+                    b.Property<int?>("BookingId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("BookingId"));
 
-                    b.Property<DateTime>("BookingDate")
+                    b.Property<DateTime?>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HotelId")
+                    b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("BookingId");
@@ -63,6 +63,9 @@ namespace usingLinq.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("FreeCancellaiton")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -73,6 +76,12 @@ namespace usingLinq.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ReserveNow")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -94,7 +103,6 @@ namespace usingLinq.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ReviewText")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
@@ -142,15 +150,11 @@ namespace usingLinq.Migrations
                 {
                     b.HasOne("usingLinq.Models.Hotel", "Hotel")
                         .WithMany("Bookings")
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HotelId");
 
                     b.HasOne("usingLinq.Models.User", "User")
                         .WithMany("Bookings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Hotel");
 

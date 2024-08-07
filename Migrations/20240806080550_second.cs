@@ -5,7 +5,7 @@
 namespace usingLinq.Migrations
 {
     /// <inheritdoc />
-    public partial class bookingsecond : Migration
+    public partial class second : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

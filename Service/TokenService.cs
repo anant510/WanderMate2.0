@@ -26,7 +26,7 @@ namespace usingLinq.Service
             new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Role, user.Role)
-        };
+            };
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
@@ -35,17 +35,7 @@ namespace usingLinq.Service
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials);
 
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var ourToken = new JwtSecurityToken(
-                _configuration["Jwt:Issuer"],
-                _configuration["Jwt:Audience"],
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(10),
-                signingCredentials: signIn);
-
-            var jwtToken = new JwtSecurityTokenHandler().WriteToken(ourToken);
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
             return jwtToken;
 
         }

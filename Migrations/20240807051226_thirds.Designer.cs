@@ -12,8 +12,8 @@ using usingLinq.Context;
 namespace usingLinq.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240802023218_reviewcreate")]
-    partial class reviewcreate
+    [Migration("20240807051226_thirds")]
+    partial class thirds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,32 @@ namespace usingLinq.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("usingLinq.Models.Booking", b =>
+                {
+                    b.Property<int?>("BookingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("BookingId"));
+
+                    b.Property<DateTime?>("BookingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookingId");
+
+                    b.HasIndex("HotelId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Bookings");
+                });
 
             modelBuilder.Entity("usingLinq.Models.Hotel", b =>
                 {
@@ -37,6 +63,9 @@ namespace usingLinq.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("FreeCancellation")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -47,6 +76,12 @@ namespace usingLinq.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ReserveNow")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -68,12 +103,16 @@ namespace usingLinq.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ReviewText")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("HotelId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -107,6 +146,23 @@ namespace usingLinq.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("usingLinq.Models.Booking", b =>
+                {
+                    b.HasOne("usingLinq.Models.Hotel", "Hotel")
+                        .WithMany("Bookings")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("usingLinq.Models.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Hotel");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("usingLinq.Models.Review", b =>
                 {
                     b.HasOne("usingLinq.Models.Hotel", "Hotel")
@@ -114,11 +170,27 @@ namespace usingLinq.Migrations
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("usingLinq.Models.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.Navigation("Hotel");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("usingLinq.Models.Hotel", b =>
                 {
+                    b.Navigation("Bookings");
+
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("usingLinq.Models.User", b =>
+                {
+                    b.Navigation("Bookings");
+
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618

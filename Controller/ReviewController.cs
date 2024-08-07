@@ -27,7 +27,7 @@ namespace usingLinq.Controller
             return await _context.Reviews
                                  .Include(r => r.Hotel)
                                  .Include(r => r.User)
-                                 .ToListAsync();
+                                   .ToListAsync();
         }
 
         //   [HttpGet]  

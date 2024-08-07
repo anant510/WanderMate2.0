@@ -12,8 +12,8 @@ using usingLinq.Context;
 namespace usingLinq.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240804150312_bookingthird")]
-    partial class bookingthird
+    [Migration("20240806075403_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,9 @@ namespace usingLinq.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("FreeCancellaiton")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -73,6 +76,12 @@ namespace usingLinq.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ReserveNow")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

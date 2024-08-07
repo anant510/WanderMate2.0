@@ -17,11 +17,24 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+         // Use the default settings or customize as needed without ReferenceHandler.Preserve
+            // options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            // options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
     });
+
+    // Add CORS services and configure policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 builder.Services.AddSingleton<TokenService>();
 
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -80,6 +93,9 @@ builder.Services.AddSwaggerGen(opt =>
 
 var app = builder.Build();
 
+
+// Enable CORS
+app.UseCors("AllowAllOrigins");
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
