@@ -31,6 +31,12 @@ namespace usingLinq.Controller
             }
 
             var token = _tokenService.GenerateToken(user);
+
+            // Store the token and user data in the session
+            HttpContext.Session.SetString("AuthToken", token);
+            HttpContext.Session.SetString("UserName", user.Name);
+            HttpContext.Session.SetString("UserRole", user.Role);
+
             return Ok(new { token });
         }
     }

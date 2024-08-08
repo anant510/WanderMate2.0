@@ -26,6 +26,21 @@ namespace usingLinq.Controller
             return Ok(users);
         }
 
+         [HttpGet("profile")]
+        public IActionResult GetProfile()
+        {
+            // Retrieve user data from the session
+            var userName = HttpContext.Session.GetString("UserName");
+            var userRole = HttpContext.Session.GetString("UserRole");
+
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(userRole))
+            {
+                return Unauthorized("User data not found in session");
+            }
+
+            return Ok(new { UserName = userName, UserRole = userRole });
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] UserDto model)
         {
@@ -42,5 +57,14 @@ namespace usingLinq.Controller
             return Ok("User created successfully");
 
         }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // Clear the session data
+            HttpContext.Session.Clear();
+            return Ok(new { message = "Logged out successfully" });
+        }
+        
     }
 }

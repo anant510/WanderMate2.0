@@ -12,6 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+// Add services to the container
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 //for relationship we must add this jsonserilizer
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -93,6 +103,8 @@ builder.Services.AddSwaggerGen(opt =>
 
 var app = builder.Build();
 
+
+app.UseSession(); // Enable session
 
 // Enable CORS
 app.UseCors("AllowAllOrigins");

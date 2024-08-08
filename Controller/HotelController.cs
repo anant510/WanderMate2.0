@@ -27,7 +27,7 @@ namespace usingLinq.Controller
         {
              var hotels = await _context.Hotels.ToListAsync();
              var hotelDTO = hotels.Select( hotel => new HotelDto {
-
+                Id = hotel.Id,
                 Name = hotel.Name,
                 Price=hotel.Price,
                 Description=hotel.Description,
@@ -48,9 +48,10 @@ namespace usingLinq.Controller
         {
           try{
             // Ensure IsDeleted is false
-            hotelDto.IsDeleted = false;
+            // hotelDto.IsDeleted = false;
 
             var hotel = new Hotel{
+                // Id = hotelDto.Id,
                 Name = hotelDto.Name,
                 Description = hotelDto.Description,
                 ImageUrl = hotelDto.ImageUrl,
@@ -89,10 +90,6 @@ namespace usingLinq.Controller
                 return BadRequest("Hotel data is null");
             }
 
-            // if (id != hotelDto.Id)
-            // {
-            //     return BadRequest("ID mismatch");
-            // }
 
             // Find the existing hotel entity by id
             var findHotel = await _context.Hotels.FindAsync(id);
@@ -103,13 +100,14 @@ namespace usingLinq.Controller
             }
 
             // Update the hotel entity with values from the DTO
+            // findHotel.Id = hotelDto.Id;
             findHotel.Name = hotelDto.Name;
             findHotel.Description = hotelDto.Description;
             findHotel.ImageUrl = hotelDto.ImageUrl;
             findHotel.Price = hotelDto.Price; // Use existing price if not provided
             findHotel.FreeCancellation = hotelDto.FreeCancellation;
             findHotel.ReserveNow = hotelDto.ReserveNow;
-            findHotel.IsDeleted = hotelDto.IsDeleted;
+            //findHotel.IsDeleted = hotelDto.IsDeleted;
 
             _context.Entry(findHotel).State = EntityState.Modified;
 
