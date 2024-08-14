@@ -13,6 +13,7 @@ namespace usingLinq.Controller
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles ="Admin")]
     public class HotelController : ControllerBase  
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +22,7 @@ namespace usingLinq.Controller
         {
             _context = context;
         }
-        // [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="Admin,User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> Get()
         {

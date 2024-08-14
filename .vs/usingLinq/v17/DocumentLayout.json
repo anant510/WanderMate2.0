@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\controller\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:controller\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\controller\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:controller\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|c:\\users\\dell\\desktop\\ec\\usinglinq\\controller\\hotelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A7362EC3-2A34-4B06-A837-9769CF006904}|usingLinq.csproj|solutionrelative:controller\\hotelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -19,6 +43,83 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Dtos\\UserDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UserDto.cs",
+              "ToolTip": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Dtos\\UserDto.cs",
+              "RelativeToolTip": "Dtos\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T02:22:04.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Controller\\UserController.cs",
+              "RelativeDocumentMoniker": "Controller\\UserController.cs",
+              "ToolTip": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Controller\\UserController.cs",
+              "RelativeToolTip": "Controller\\UserController.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAkwD4AAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T02:21:43.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Controller\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controller\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Controller\\AuthController.cs",
+              "RelativeToolTip": "Controller\\AuthController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAuwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T02:21:40.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T02:21:24.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Service\\TokenService.cs",
+              "RelativeDocumentMoniker": "Service\\TokenService.cs",
+              "ToolTip": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Service\\TokenService.cs",
+              "RelativeToolTip": "Service\\TokenService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T00:50:50.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAC0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-13T00:50:23.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "HotelController.cs",
               "DocumentMoniker": "C:\\Users\\Dell\\Desktop\\EC\\usingLinq\\Controller\\HotelController.cs",
               "RelativeDocumentMoniker": "Controller\\HotelController.cs",
@@ -26,8 +127,7 @@
               "RelativeToolTip": "Controller\\HotelController.cs",
               "ViewState": "AQIAABsAAAAAAAAAAAAYwGUAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-07T11:59:53.66Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-07T11:59:53.66Z"
             }
           ]
         }

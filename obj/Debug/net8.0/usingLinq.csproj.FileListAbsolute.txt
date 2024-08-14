@@ -137,3 +137,4 @@ C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\usingLinq.genruntimeconfig.c
 C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\ref\usingLinq.dll
 C:\Users\Dell\Desktop\EC\usingLinq\obj\Debug\net8.0\usingLinq.sourcelink.json
 C:\Users\Dell\Desktop\EC\usingLinq\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Dell\Desktop\EC\usingLinq\bin\Debug\net8.0\BCrypt.Net-Next.dll
