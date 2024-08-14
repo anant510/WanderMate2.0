@@ -45,7 +45,7 @@ namespace usingLinq.Controller
                 // Store token and user data in the session
                     HttpContext.Session.SetString("AuthToken", token);
                     HttpContext.Session.SetString("Id", user.Id.ToString());
-                    HttpContext.Session.SetString("UserName", user.Name);
+                    HttpContext.Session.SetString("UserName", user.Name);   
                     HttpContext.Session.SetString("UserRole", user.Role);
 
                 return Ok(new { Message = "User signed in successfully!", Token = token });

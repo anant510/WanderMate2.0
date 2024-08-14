@@ -22,7 +22,7 @@ namespace usingLinq.Controller
         {
             _context = context;
         }
-        [Authorize(Roles ="Admin,User")]
+        [Authorize(Roles ="User")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> Get()
         {
