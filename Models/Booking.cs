@@ -14,7 +14,7 @@ namespace usingLinq.Models
 
     public DateTime? BookingDate { get; set; }
 
-     public int? UserId { get; set; }
+    public int? UserId { get; set; }
     public User? User { get; set; }
 
      public int? HotelId { get; set; }

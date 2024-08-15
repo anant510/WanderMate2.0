@@ -18,6 +18,8 @@ namespace usingLinq.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<PasswordReset> PasswordResets { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,7 +32,7 @@ namespace usingLinq.Context
             .WithMany(u => u.Bookings)
             .HasForeignKey(b => b.UserId)
             .OnDelete(DeleteBehavior.Cascade);
-
+ 
             modelBuilder.Entity<Booking>()
             .HasOne(b => b.Hotel)
             .WithMany(h => h.Bookings)
@@ -49,6 +51,10 @@ namespace usingLinq.Context
             .WithMany(h => h.Reviews)
             .HasForeignKey(r => r.HotelId)
             .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PasswordReset>()
+            .Property(pr => pr.Token)
+            .IsRequired(); // or any other configuration needed
 
             
     

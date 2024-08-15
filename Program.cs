@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using usingLinq.Context;
+using usingLinq.Models;
 using usingLinq.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,6 +44,9 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddSingleton<TokenService>();
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+builder.Services.AddSingleton<EmailService>();
 
 // builder.Services.AddControllers();
 
