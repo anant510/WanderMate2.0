@@ -86,9 +86,13 @@ namespace usingLinq.Controller
             // Simulate generating a password reset token (In reality, you'd generate a secure, unique token)
             var resetToken = Guid.NewGuid().ToString();   // Generate a secure token
 
+            // Store the reset token with the user's information
+            _context.PasswordResets.Add(new PasswordReset { Token = resetToken });
+            await _context.SaveChangesAsync();
+
             var emailBody = $"This is your Reset Token: {resetToken}";
             await _emailService.SendEmailAsync(user.Username, "Password Reset", emailBody);
-
+    
             // Construct reset URL
             // var resetLink = Url.Action("ResetPassword",
             //     "Account",  // Controller name
@@ -111,6 +115,39 @@ namespace usingLinq.Controller
             // await _emailService.SendEmailAsync(user.Username, "Password Reset", emailBody);
 
             return Ok("If an account with that email exists, a password reset link has been sent.");
+        }
+
+
+        [HttpPost("update-password")]
+
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePassword model)
+        {
+            var verifiedToken = _context.PasswordResets.FirstOrDefault(u => u.Token == model.Token);
+
+            if (verifiedToken == null)
+            {
+                return BadRequest("Invalid or expired token.");
+            }
+
+             // Find the user associated with the reset token
+            var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            // Hash the new password
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Update_Password);
+
+            // Update the user's password
+            user.Password = hashedPassword;
+            _context.Users.Update(user);
+
+             // Save changes to the database
+            await _context.SaveChangesAsync();
+
+             return Ok("Updated Sucessfully");
+
         }
 
 
